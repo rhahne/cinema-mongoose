@@ -1,6 +1,4 @@
 const Celebrity = require('../models/celebrity')
-// connect to database
-// if it doesn't exist, it will create it
 
 function createNewCelebsFromArray(celebArray){
   celebArray.forEach(newCeleb => {
@@ -21,4 +19,4 @@ var newCelebs = [
   { name: 'Bob', occupation: 'Dancer', catchPhrase: 'aye aye aye' }
 ]
 
-//createNewCelebsFromArray(newCelebs)
+createNewCelebsFromArray(newCelebs)

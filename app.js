@@ -1,36 +1,27 @@
+// init mongoose
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, (err)=>{
+  if(err) console.log(err)
+  else console.log("connected");
+});
+
 // init express
 const app = require('express')();
+const Celebrity = require('./models/celebrity')
 
 // set view shit
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
-// init mongoose
-const mongoose = require('mongoose');
-// connect to database
-// if it doesn't exist, it will create it
-mongoose.connect('mongodb://localhost/cinema', (err)=> {
-  if(err) console.log(err)
-  else {
-    require("./bin/seeds.js")
-  }
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
-/*
-function showCelebs() {
-  console.log('All the CELEBS!');
-  Celebrity.find({}, (err, celebs) => {
-    app.get('/', (req, res) => {
-      res.render('index', {celebs});
-    });
-    celebs.forEach((celeb)=> {
-      console.log(' --> celeb: ', celeb.name);
-    })
+// Show the Celebs
+Celebrity.find({}, (err, celebs) => {
+  app.get('/celebrities', (req, res) => {
+    res.render('celebrities/index', {celebs});
   });
-}
-*/
-//showCelebs();
-
-
+});
 
 app.listen(3000);
