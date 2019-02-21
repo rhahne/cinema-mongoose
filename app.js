@@ -5,8 +5,6 @@ mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, 
   else console.log("connected");
 });
 
-
-
 // init express
 const app = require('express')();
 const Celebrity = require('./models/celebrity')
@@ -26,8 +24,8 @@ app.set('views', __dirname + '/views');
 const celebrities = require('./routes/celebrities');
 app.use('/celebrities', celebrities);
 
-
-
-
+app.get('/', (req, res) => {
+  res.render('index')
+});
 
 app.listen(3000);

@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Celebrity = require('../models/celebrity.js')
 
-
-
-
 Celebrity.find({}, (err, celebs) => {
   router.get('/', (req, res) => {
     if (req.query.id){
@@ -22,19 +19,29 @@ router.get('/new', (req, res) => {
   res.render('celebrities/new')
 });
 
-
 router.post('/', (req,res) => {
   Celebrity.create(req.body, function (err) {
     if (err) {
       console.log(err);
     } else {
-      Celebrity.find({}, (err, celebs) => {
-        res.render('celebrities/index', {celebs})
-      })
+        Celebrity.find({}, (err, celebs) => {
+          res.render('celebrities/index', {celebs})
+        })
       console.log(`celeb SAVED.`);
     }
   })
 })
 
+router.post('/:id/delete', (req,res) => {
+  Celebrity.findOneAndDelete(req.params.id, function(err){
+    if (err) console.log(err);
+    else {
+      console.log('deleted');
+      Celebrity.find({}, (err, celebs) => {
+        res.render('celebrities/index', {celebs})
+      })
+    }
+  })
+})
 
 module.exports = router;
