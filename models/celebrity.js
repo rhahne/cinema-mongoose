@@ -1,1 +1,11 @@
-//module.exports = Celebrity
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/cinema');
+const Schema = mongoose.Schema
+// Create Model 'Celebrity'
+const Celebrity = mongoose.model('Celebrity', new Schema({ 
+  name: String,
+  occupation: String,
+  catchPhrase: String
+}));
+
+module.exports = Celebrity
