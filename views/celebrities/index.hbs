@@ -2,6 +2,10 @@
 
 <ul>
   {{#each celebs}}
-    <li>{{this.name}}</li>
+    <li>
+      <a href="celebrities?id={{this.id}}">
+        {{this.name}} 
+      </a>
+    </li>
   {{/each}}
 </ul>

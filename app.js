@@ -5,23 +5,29 @@ mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, 
   else console.log("connected");
 });
 
+
+
 // init express
 const app = require('express')();
 const Celebrity = require('./models/celebrity')
+
+// body-parser stuff for form data
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// in latest body-parser use like below.
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // set view shit
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// Route to celeb index
+const celebrities = require('./routes/celebrities');
+app.use('/celebrities', celebrities);
 
-// Show the Celebs
-Celebrity.find({}, (err, celebs) => {
-  app.get('/celebrities', (req, res) => {
-    res.render('celebrities/index', {celebs});
-  });
-});
+
+
+
 
 app.listen(3000);
