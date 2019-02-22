@@ -3,11 +3,14 @@
 <ul>
   {{#each celebs}}
     <li>
-      <a href="celebrities?id={{this.id}}">
+      <a href="/celebrity/{{this.id}}">
         {{this.name}} 
       </a>
       <form action="/celebrities/{{this.id}}/delete" method="POST" >
         <button>Delete this fucker</button>
+      </form>
+        <form action="/celebrities/{{this.id}}/edit" method="GET" >
+      <button>Edit this fucker</button>
       </form>
     </li>
   {{/each}}

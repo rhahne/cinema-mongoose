@@ -1,0 +1,15 @@
+<h2> Welcome to the edit Page </h2>
+Edit for {{celebToEdit._doc.name}}
+
+<form action="/celebrities/{{celebId}}/edit" method="POST" >
+  Name:<br>
+  <input type="text" name="name" value="{{celebToEdit._doc.name}}">
+  <br>
+  Occupation:<br>
+  <input type="text" name="occupation" value="{{celebToEdit._doc.occupation}}">
+  <br>
+  CatchPhrase:<br>
+  <input type="text" name="catchPhrase" value="{{celebToEdit._doc.catchPhrase}}">
+  <br><br>
+  <button>Send</button>
+</form>
