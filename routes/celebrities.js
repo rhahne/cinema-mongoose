@@ -79,4 +79,15 @@ router.post('/:id/edit', (req, res) => {
   });
 })
 
+// Search for Celebs
+router.post('/search', (req, res) => {
+  Celebrity.find(
+    { "name": { "$regex": req.body.search, "$options": "i" } },
+    (err,docs) => { 
+      if (err) console.log(err)
+      else res.render('celebrities/search', {docs})
+  }
+);
+})
+
 module.exports = router;

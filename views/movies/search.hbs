@@ -1,16 +1,10 @@
-<h1> Mongoose Movies! </h1>
-
-<form action="/movies/search" method="POST">
-  <label>Search for a Movie title: </label>
-  <input type="search" name='search' placeholder="Search..">
-  <button>Search!</button>
-</form>
+<h2> Welcome to the search results! </h2>
 
 <ul>
-  {{#each movies}}
+  {{#each docs}}
   <li>
     <a href="/movies/detail?id={{this.id}}">
-      {{this.title}}
+      {{this._doc.title}}
     </a>
     <form action="/movies/{{this.id}}/delete" method="POST">
       <button>Delete this fucker</button>
@@ -21,3 +15,4 @@
   </li>
   {{/each}}
 </ul>
+

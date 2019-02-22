@@ -77,4 +77,15 @@ router.post('/:id/edit', (req, res) => {
   });
 })
 
+// Search for Movies
+router.post('/search', (req, res) => {
+  Movie.find(
+    { "title": { "$regex": req.body.search, "$options": "i" } },
+    (err,docs) => { 
+      if (err) console.log(err)
+      else res.render('movies/search', {docs})
+  }
+);
+})
+
 module.exports = router;
