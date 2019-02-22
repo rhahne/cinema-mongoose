@@ -4,17 +4,18 @@ mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, 
   if(err) console.log(err)
   else console.log("connected");
 });
-
-// ??????????
 mongoose.set('useFindAndModify', false);
 
 // init express
-const app = require('express')();
+const express = require('express')
+const app = express();
 
 // body-parser stuff for form data
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+
 // set view
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
