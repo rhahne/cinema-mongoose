@@ -64,7 +64,6 @@ router.get('/celebrities/:id/edit', (req, res) => {
     }
   })
 })
-
 // receive edit changes from edit page
 router.post('/celebrities/:id/edit', (req, res) => {
   Celebrity.findOneAndUpdate({

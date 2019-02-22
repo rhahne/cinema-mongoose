@@ -4,6 +4,10 @@ mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, 
   if(err) console.log(err)
   else console.log("connected");
 });
+
+// ??????????
+mongoose.set('useFindAndModify', false);
+
 // init express
 const app = require('express')();
 const Celebrity = require('./models/celebrity')
