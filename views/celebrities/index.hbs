@@ -3,7 +3,7 @@
 <ul>
   {{#each celebs}}
   <li>
-    <a href="/celebrity/{{this.id}}">
+    <a href="/celebrities/detail?id={{this.id}}">
       {{this.name}}
     </a>
     <form action="/celebrities/{{this.id}}/delete" method="POST">

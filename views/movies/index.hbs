@@ -1,0 +1,17 @@
+<h1> Mongoose Movies! </h1>
+
+<ul>
+  {{#each movies}}
+  <li>
+    <a href="/movies/detail?id={{this.id}}">
+      {{this.title}}
+    </a>
+    <form action="/movies/{{this.id}}/delete" method="POST">
+      <button>Delete this fucker</button>
+    </form>
+    <form action="/movies/{{this.id}}/edit" method="GET">
+      <button>Edit this fucker</button>
+    </form>
+  </li>
+  {{/each}}
+</ul>

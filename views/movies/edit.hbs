@@ -1,0 +1,15 @@
+<h2> Welcome to the edit Page </h2>
+Edit for {{movieToEdit._doc.title}}
+
+<form action="/movies/{{movieId}}/edit" method="POST">
+  Title:<br>
+  <input type="text" name="title" value="{{movieToEdit._doc.title}}">
+  <br>
+  Genre:<br>
+  <input type="text" name="genre" value="{{movieToEdit._doc.genre}}">
+  <br>
+  Plot:<br>
+  <input type="text" name="plot" value="{{movieToEdit._doc.plot}}">
+  <br><br>
+  <button>Send</button>
+</form>

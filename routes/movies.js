@@ -1,72 +1,70 @@
-const express = require('express');
-const router = express.Router();
-const Celebrity = require('../models/celebrity.js')
 
-// celebrities index site
+const express = require('express')
+const router = express.Router();
+const Movie = require('../models/movie.js')
+
+// movies index site
 router.get('/', (req, res) => {
-  Celebrity.find({}, (err, celebs) => {
-    res.render('celebrities/index', {
-      celebs
-    });
-  });
+  Movie.find({}, (err, movies) => {
+    if (err) console.log(err)
+    else res.render('movies/index', {movies})
+  })
 })
 
 // celebrity detail site
 router.get('/detail', (req, res) => {
   if (req.query.id) {
-    Celebrity.findById(req.query.id, function (err, celebById) {
-      res.render('celebrities/show', {
-        celebById
-      });
+    Movie.findById(req.query.id, function (err, movieById) {
+      res.render('movies/show', {movieById});
     });
   } else {
     console.log('no id defined');
   }
 })
 
-// create new celebrity site
+// create new movie site
 router.get('/new', (req, res) => {
-  res.render('celebrities/new')
+  res.render('movies/new')
 });
 
 // receive data from new celebrity site
 router.post('/', (req, res) => {
-  Celebrity.create(req.body, function (err) {
+  Movie.create(req.body, function (err) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect('/celebrities')
-      console.log(`celeb SAVED.`);
+      res.redirect('/movies')
+      console.log(`movie SAVED.`);
     }
   })
 })
 
 // receive data from delete button pressed celeb
 router.post('/:id/delete', (req, res) => {
-  Celebrity.findOneAndDelete(req.params.id, function (err) {
+  Movie.findOneAndDelete(req.params.id, function (err) {
     if (err) console.log(err);
     else {
-      res.redirect('/celebrities')
+      res.redirect('/movies')
     }
   })
 })
 
 // edit page for each celebrity
 router.get('/:id/edit', (req, res) => {
-  var celebId = req.params.id;
-  Celebrity.findById(celebId, function (err, celebToEdit) {
+  var movieId = req.params.id;
+  Movie.findById(movieId, function (err, movieToEdit) {
     if (err) console.log(err)
     else {
-      res.render('celebrities/edit', {
-        celebToEdit,
-        celebId
+      res.render('movies/edit', {
+        movieToEdit,
+        movieId
       })
     }
   })
 })
 // receive edit changes from edit page
 router.post('/:id/edit', (req, res) => {
-  Celebrity.findOneAndUpdate({
+  Movie.findOneAndUpdate({
     _id: req.params.id
   }, req.body, {
     new: true
@@ -74,7 +72,7 @@ router.post('/:id/edit', (req, res) => {
     if (err) console.log(err)
     else {
       console.log("succesfully saved");
-      res.redirect('/celebrities')
+      res.redirect('/movies')
     }
   });
 })

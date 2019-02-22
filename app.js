@@ -10,7 +10,7 @@ mongoose.set('useFindAndModify', false);
 
 // init express
 const app = require('express')();
-const Celebrity = require('./models/celebrity')
+
 // body-parser stuff for form data
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -20,8 +20,12 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
 // Route to celeb index
-const index = require('./routes/celebrities');
-app.use('/', index);
+const celebrities = require('./routes/celebrities');
+app.use('/celebrities/', celebrities);
+
+// Route to movie index
+const movies = require('./routes/movies');
+app.use('/movies/', movies);
 
 app.get('/', (req, res) => {
   res.render('index')

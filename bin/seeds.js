@@ -1,3 +1,4 @@
+/*
 const Celebrity = require('../models/celebrity')
 
 var celebArray = [
@@ -15,3 +16,22 @@ celebArray.forEach(newCeleb => {
     }
 });
 })
+
+const Movie = require('../models/movie')
+
+var movieArray = [
+  { title: 'Rudin', genre: 'Actor', plot: 'ho ho ho!' },
+  { title: 'John', genre: 'Singer', plot: 'salamander' },
+  { title: 'Bob', genre: 'Dancer', plot: 'aye aye aye' }
+]
+
+movieArray.forEach(newMovie => {
+  Movie.create(newMovie, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`movie SAVED.`);
+    }
+});
+})
+*/
