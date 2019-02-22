@@ -4,19 +4,14 @@ mongoose.connect('mongodb://localhost:27017/cinema', { useNewUrlParser: true }, 
   if(err) console.log(err)
   else console.log("connected");
 });
-
 // init express
 const app = require('express')();
 const Celebrity = require('./models/celebrity')
-
 // body-parser stuff for form data
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// in latest body-parser use like below.
-//app.use(bodyParser.urlencoded({ extended: true }));
-
-// set view shit
+// set view
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 

@@ -2,27 +2,35 @@ const express = require('express');
 const router = express.Router();
 const Celebrity = require('../models/celebrity.js')
 
+// celebrities index site
 router.get('/celebrities/', (req, res) => {
   Celebrity.find({}, (err, celebs) => {
-    res.render('celebrities/index', {celebs});
+    res.render('celebrities/index', {
+      celebs
+    });
   });
 })
 
+// celebrity detail site
 router.get('/celebrity/:id', (req, res) => {
-  if (req.params.id){
+  if (req.params.id) {
     Celebrity.findById(req.params.id, function (err, celebById) {
-      res.render('celebrities/show', {celebById});
+      res.render('celebrities/show', {
+        celebById
+      });
     });
-  }else{
+  } else {
     console.log('no id defined');
   }
 })
 
+// create new celebrity site
 router.get('/celebrities/new', (req, res) => {
   res.render('celebrities/new')
 });
 
-router.post('/celebrities/', (req,res) => {
+// receive data from new celebrity site
+router.post('/celebrities/', (req, res) => {
   Celebrity.create(req.body, function (err) {
     if (err) {
       console.log(err);
@@ -33,8 +41,9 @@ router.post('/celebrities/', (req,res) => {
   })
 })
 
-router.post('/celebrities/:id/delete', (req,res) => {
-  Celebrity.findOneAndDelete(req.params.id, function(err){
+// receive data from delete button pressed celeb
+router.post('/celebrities/:id/delete', (req, res) => {
+  Celebrity.findOneAndDelete(req.params.id, function (err) {
     if (err) console.log(err);
     else {
       res.redirect('/celebrities')
@@ -42,25 +51,33 @@ router.post('/celebrities/:id/delete', (req,res) => {
   })
 })
 
-router.get('/celebrities/:id/edit', (req,res) => {
+// edit page for each celebrity
+router.get('/celebrities/:id/edit', (req, res) => {
   var celebId = req.params.id;
-  Celebrity.findById(celebId, function(err, celebToEdit){
+  Celebrity.findById(celebId, function (err, celebToEdit) {
     if (err) console.log(err)
-    else{
-      res.render('celebrities/edit', {celebToEdit, celebId})
+    else {
+      res.render('celebrities/edit', {
+        celebToEdit,
+        celebId
+      })
     }
   })
 })
 
+// receive edit changes from edit page
 router.post('/celebrities/:id/edit', (req, res) => {
-  Celebrity.findOneAndUpdate({_id: req.params.id}, req.body, {new:true}, function(err){
+  Celebrity.findOneAndUpdate({
+    _id: req.params.id
+  }, req.body, {
+    new: true
+  }, function (err) {
     if (err) console.log(err)
     else {
       console.log("succesfully saved");
       res.redirect('/celebrities')
     }
-});
-
+  });
 })
 
 
