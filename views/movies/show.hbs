@@ -1,6 +1,23 @@
 <h1> Detail of one Movie </h1>
 <ul>
   <li>{{movieById._doc.title}}</li>
-  <li>{{movieById._doc.genre}}</li>
-  <li>{{movieById._doc.plot}}</li>
+  <li>{{movieById._doc.director}}</li>
+  <li>
+    <ul>
+      {{#each movieById._doc.stars}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </li>
+  <li>
+    <img src="{{movieById._doc.image}}" />
+  </li>
+  <li>{{movieById._doc.description}}</li>
+  <li>
+    <ul>
+      {{#each movieById._doc.showtimes}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </li>
 </ul>

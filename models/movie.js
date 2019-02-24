@@ -9,8 +9,11 @@ const Schema = mongoose.Schema
 // Create Model 'Movie'
 const Movie = mongoose.model('Movie', new Schema({
   title: String,
-  genre: String,
-  plot: String
+  director: String,
+  stars: Array,
+  image: String,
+  description: String,
+  showtimes: Array
 }));
 
 module.exports = Movie
