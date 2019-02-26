@@ -9,6 +9,18 @@ mongoose.set('useFindAndModify', false);
 // init express
 const express = require('express')
 const app = express();
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
+// init sessions
+app.use(session({
+  secret: "unicoooorn",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 
 // body-parser stuff for form data
 var bodyParser = require('body-parser');
@@ -19,6 +31,10 @@ app.use(express.static(__dirname + '/public'));
 // set view
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+
+// Route Authentication
+const auth = require('./routes/auth');
+app.use('/', auth);
 
 // Route to celeb index
 const celebrities = require('./routes/celebrities');

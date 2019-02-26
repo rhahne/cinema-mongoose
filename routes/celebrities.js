@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Celebrity = require('../models/celebrity.js')
 
+// check if logged in
+router.get('/*', (req, res, next) => {
+  if(req.session.currentUser){
+    next()
+  }
+  else{
+    res.send("you are not permitted to view this page")
+  }
+})
+
 // celebrities index site
 router.get('/', (req, res) => {
   Celebrity.find({}, (err, celebs) => {

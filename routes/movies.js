@@ -2,6 +2,16 @@ const express = require('express')
 const router = express.Router();
 const Movie = require('../models/movie.js')
 
+// check if logged in
+router.get('/*', (req, res, next) => {
+  if(req.session.currentUser){
+    next()
+  }
+  else{
+    res.send("you are not permitted to view this page")
+  }
+})
+
 // movies index site
 router.get('/', (req, res) => {
   Movie.find({}, (err, movies) => {
